@@ -1,0 +1,4 @@
+variable "managment-subnet-link" {
+  
+}
+
