@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"Network","Source":"./Netwrok_Infrastructure","Dir":"Netwrok_Infrastructure"},{"Key":"VMs-NAT","Source":"./VMs-NAT","Dir":"VMs-NAT"}]}
+{"Modules":[{"Key":"Network","Source":"./Netwrok_Infrastructure","Dir":"Netwrok_Infrastructure"},{"Key":"VMs-NAT","Source":"./VMs","Dir":"VMs"},{"Key":"","Source":"","Dir":"."}]}

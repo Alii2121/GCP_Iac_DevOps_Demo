@@ -14,7 +14,7 @@ module "Network" {
 
 module "VMs-NAT" {
 
-    source = "./VMs-NAT"
+    source = "./VMs"
     managment-subnet-link = module.Network.managment-subnet-link
   
 }
