@@ -12,8 +12,6 @@ resource "google_compute_instance" "private_instance" {
   network_interface {
     subnetwork = var.managment-subnet-link
 
-    access_config {
-      // This instance does not have a public IP address.
-    }
+    
   }
 }
