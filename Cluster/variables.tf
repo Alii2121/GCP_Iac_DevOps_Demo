@@ -1,0 +1,3 @@
+variable "restricted-subnet-link" {
+  
+}

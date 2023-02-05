@@ -18,3 +18,13 @@ module "VMs-NAT" {
     managment-subnet-link = module.Network.managment-subnet-link
   
 }
+
+
+
+module "Cluster" {
+  
+  source = "./Cluster"
+  restricted-subnet-link = module.Network.restricted-subnet-link
+
+
+}
