@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: py-app
+  template:
+    metadata:
+      labels:
+        app: py-app
+    spec:
+      containers:
+      - name: py-app
+        envFrom:
+        - configMapRef:
+            name: my-configmap
+        image: gcr.io/ali-marwan-project/py-app
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8000
+        env:
+        - name: REDIS_HOST
+          value: svc-redis
+        - name: REDIS_PORT
+          value: "6379"
+                     

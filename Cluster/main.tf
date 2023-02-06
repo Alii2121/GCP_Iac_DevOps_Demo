@@ -1,23 +1,58 @@
+
+
+
+
+resource "google_service_account" "gke_sa" {
+  account_id = "gke-cluster-sa"
+}
+
+
+resource "google_project_iam_member" "cluster-service-account-role" {
+  project = "ali-marwan-project"
+  role    = "roles/storage.objectViewer"
+  member  = "serviceAccount:${google_service_account.gke_sa.email}"
+}
+
+
+
+
+
+
+
+
 resource "google_container_cluster" "restricted_cluster" {
   name               = "restricted-cluster"
   location           = "us-central1-a"
   initial_node_count = "2"
 
- 
+   remove_default_node_pool = true
+
+  private_cluster_config {
+    enable_private_endpoint = true
+    enable_private_nodes = true
+    master_ipv4_cidr_block = "172.16.0.0/28"
+  }
 
   network_policy {
     enabled = true
   }
   
+  ip_allocation_policy {
+    cluster_ipv4_cidr_block = "192.168.0.0/16"
+    services_ipv4_cidr_block = "10.96.0.0/16" 
+  }
 
   network = var.vpc
   subnetwork = var.restricted-subnet-link
-  private_cluster_config {
-    enable_private_endpoint = true
-    enable_private_nodes = true
-    master_ipv4_cidr_block = "10.0.7.0/28"
-  }
+  
 
+
+ master_authorized_networks_config {
+    cidr_blocks {
+      display_name = "management-subnet"
+      cidr_block = "10.0.0.0/24"
+    }
+  }
     node_config {
     oauth_scopes = [
       "https://www.googleapis.com/auth/compute",
@@ -40,7 +75,7 @@ resource "google_container_node_pool" "restricted_nodes" {
   node_config {
     
     image_type   = "COS_CONTAINERD"
-    machine_type = "f1-micro"
+    machine_type = "e2-micro"
     service_account = google_service_account.gke_sa.email
     oauth_scopes = [
       "https://www.googleapis.com/auth/compute",
@@ -56,10 +91,5 @@ resource "google_container_node_pool" "restricted_nodes" {
 
 
 
-
-# Create the custom Service Account
-resource "google_service_account" "gke_sa" {
-  account_id = "gke-cluster-sa"
-}
 
 
