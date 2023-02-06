@@ -1,6 +1,5 @@
 ############# Create A Custom VPC #############
 
-
 resource "google_compute_network" "main-vpc" {
   
   project                 = "ali-marwan-project"

@@ -16,7 +16,7 @@ module "VMs-NAT" {
 
     source = "./VMs"
     managment-subnet-link = module.Network.managment-subnet-link
-  
+    vpc = module.Network.vpc
 }
 
 
@@ -25,6 +25,6 @@ module "Cluster" {
   
   source = "./Cluster"
   restricted-subnet-link = module.Network.restricted-subnet-link
-
+  vpc = module.Network.vpc
 
 }
