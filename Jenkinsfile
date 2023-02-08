@@ -9,7 +9,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                     sh """  
-                        gcloud auth application-default login                
+                                        
                          terraform init  
                         """
             }
