@@ -8,10 +8,8 @@ pipeline {
         }
         stage('Terraform Init') {
             steps {
-                    sh """  
-                                        
-                         terraform init  
-                        """
+                  sh 'terraform init'  
+                       
             }
         }
         stage('Terraform Plan') {
