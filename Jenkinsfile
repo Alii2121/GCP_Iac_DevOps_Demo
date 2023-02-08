@@ -9,7 +9,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                     sh """  
-                        apt-get update && apt-get install -y gnupg software-properties-common                 
+                        gcloud auth application-default login                
                          terraform init  
                         """
             }
