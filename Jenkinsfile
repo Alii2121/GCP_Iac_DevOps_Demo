@@ -8,7 +8,11 @@ pipeline {
         }
         stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+sh """
+        apt update -y
+        apt install terraform -y                 
+        terraform init  
+"""
             }
         }
         stage('Terraform Plan') {
