@@ -8,11 +8,10 @@ pipeline {
         }
         stage('Terraform Init') {
             steps {
-sh """
-        apt update -y
-        apt install terraform -y                 
-        terraform init  
-"""
+                    sh """  
+                        apt-get update && apt-get install -y gnupg software-properties-common                 
+                         terraform init  
+                        """
             }
         }
         stage('Terraform Plan') {
