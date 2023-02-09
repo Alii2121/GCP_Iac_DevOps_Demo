@@ -3,7 +3,7 @@ resource "google_service_account" "instance-sa" {
   display_name = "instance-sa"
 }
 resource "google_project_iam_member" "instance-sa" {
-  project = "ali-marwan-project"
+  project = var.project 
   role    = "roles/container.admin"
   member  = "serviceAccount:${google_service_account.instance-sa.email}"
 }
@@ -34,7 +34,7 @@ resource "google_compute_instance" "private_instance" {
 
 
 resource "google_compute_firewall" "ssh" {
-  project     = "ali-marwan-project"
+  project     = var.project 
   name        = "ssh"
   network     = var.vpc
   priority    = 100

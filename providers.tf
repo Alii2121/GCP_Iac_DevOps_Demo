@@ -1,4 +1,4 @@
 provider "google" {
-  project     = "ali-marwan-project"
-  region      = var.region
+  project = "ali-marwan-project"
+  region  = var.region
 }

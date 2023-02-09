@@ -8,7 +8,7 @@ resource "google_service_account" "gke_sa" {
 
 
 resource "google_project_iam_member" "cluster-service-account-role" {
-  project = "ali-marwan-project"
+  project = var.project
   role    = "roles/storage.objectViewer"
   member  = "serviceAccount:${google_service_account.gke_sa.email}"
 }
@@ -30,7 +30,7 @@ resource "google_container_cluster" "restricted_cluster" {
   private_cluster_config {
     enable_private_endpoint = true
     enable_private_nodes = true
-    master_ipv4_cidr_block = "172.16.0.0/28"
+    master_ipv4_cidr_block = var.master_ipv4
   }
 
   network_policy {
@@ -38,8 +38,8 @@ resource "google_container_cluster" "restricted_cluster" {
   }
   
   ip_allocation_policy {
-    cluster_ipv4_cidr_block = "192.168.0.0/16"
-    services_ipv4_cidr_block = "10.96.0.0/16" 
+    cluster_ipv4_cidr_block = var.cluster_ipv4
+    services_ipv4_cidr_block = var.services_ipv4
   }
 
   network = var.vpc
