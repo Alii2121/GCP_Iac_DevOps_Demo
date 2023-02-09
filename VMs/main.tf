@@ -1,3 +1,7 @@
+
+
+
+########### VM Service Account ##############
 resource "google_service_account" "instance-sa" {
   account_id   = "instance-sa"
   display_name = "instance-sa"
@@ -8,6 +12,8 @@ resource "google_project_iam_member" "instance-sa" {
   member  = "serviceAccount:${google_service_account.instance-sa.email}"
 }
 
+
+################## Private VM ####################
 
 resource "google_compute_instance" "private_instance" {
   name         = "private-instance"
@@ -32,7 +38,7 @@ resource "google_compute_instance" "private_instance" {
 }
 
 
-
+################### VM Firewall #################
 resource "google_compute_firewall" "ssh" {
   project     = var.project 
   name        = "ssh"

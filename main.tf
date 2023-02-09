@@ -3,9 +3,11 @@
 module "Network" {
 
   source = "./Netwrok_Infrastructure"
+  
   # Subnets
   management-subnet-cidr = var.management-subnet-cidr
   restricted-subnet-cidr = var.restricted-subnet-cidr
+ 
   # Pods Cidr range 
   pods-cidr = var.pods-cidr
   region    = var.region
@@ -21,7 +23,7 @@ module "VMs-NAT" {
   # Subnet
   managment-subnet-link = module.Network.managment-subnet-link
   vpc                   = module.Network.vpc
-  project = var.project
+  project               = var.project
 }
 
 
@@ -29,11 +31,13 @@ module "VMs-NAT" {
 module "Cluster" {
 
   source                 = "./Cluster"
-  project = var.project
+  project                = var.project
   restricted-subnet-link = module.Network.restricted-subnet-link
   vpc                    = module.Network.vpc
-  master_ipv4 = var.master_ipv4
-  services_ipv4 = var.services_ipv4
-  cluster_ipv4 = var.cluster_ipv4
+ 
+ # IPs
+  master_ipv4            = var.master_ipv4
+  services_ipv4          = var.services_ipv4
+  cluster_ipv4           = var.cluster_ipv4
 
 }

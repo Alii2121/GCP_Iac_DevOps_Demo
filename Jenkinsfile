@@ -1,3 +1,8 @@
+
+
+// In order to run this pipeline you need to configure your GCP personal credentials locally on jenkins master machine 
+
+
 pipeline {
     agent any
     stages {

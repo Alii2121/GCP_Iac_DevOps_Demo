@@ -51,6 +51,66 @@ resource "google_compute_subnetwork" "restricted-subnet" {
   
 }
 
+############# Firewall rules for Restricted Subnet ####################
+
+## These rules are specified to block egress traffic and allow it only through google APIs
+
+
+
+# The first rule blocks all egress traffic from restricted subnet and allows only tcp traffic on port 443 that's used to communicate with google APIs
+resource "google_compute_firewall" "block_internet_egress" {
+  name = "block-internet-egress"
+  network = google_compute_network.main-vpc.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["443"]
+  }
+
+  source_ranges = [var.restricted-subnet-cidr]
+  target_tags   = ["private-rules"]
+  direction     = "EGRESS"
+
+  depends_on = [
+    google_compute_subnetwork.restricted-subnet,
+  ]
+}
+
+
+
+
+## The Secod rule define destnation ranges of google APIs to allow traffic
+resource "google_compute_firewall" "allow_google_apis_egress" {
+  name = "allow-google-apis-egress"
+  network = google_compute_network.main-vpc.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["443"]
+  }
+
+  source_ranges = [var.restricted-subnet-cidr]
+  target_tags   = ["private-rules"]
+  direction     = "EGRESS"
+
+  destination_ranges = [
+    "*.googleusercontent.com",
+    "*.googleapis.com",
+  ]
+
+  depends_on = [
+    google_compute_subnetwork.restricted-subnet,
+  ]
+}
+
+
+
+
+
+
+
+
+
 ############## NAT gateway ###############
 resource "google_compute_router" "router" {
   name    = "my-router"

@@ -1,7 +1,7 @@
 
 
 
-
+####### GKE Cluster Service Account #######
 resource "google_service_account" "gke_sa" {
   account_id = "gke-cluster-sa"
 }
@@ -17,15 +17,14 @@ resource "google_project_iam_member" "cluster-service-account-role" {
 
 
 
-
+########## GKE Cluster ########
 
 
 resource "google_container_cluster" "restricted_cluster" {
   name               = "restricted-cluster"
   location           = "us-central1-a"
   initial_node_count = "2"
-
-   remove_default_node_pool = true
+  remove_default_node_pool = true
 
   private_cluster_config {
     enable_private_endpoint = true
@@ -66,14 +65,19 @@ resource "google_container_cluster" "restricted_cluster" {
 }
 
 
+
+
+############## Node Pool ############
+
 resource "google_container_node_pool" "restricted_nodes" {
   name       = "restricted-nodes"
   cluster    = google_container_cluster.restricted_cluster.name
   location   = "us-central1-a"
   node_count = "2"
-  
+ 
   node_config {
     
+    tags = ["private-rules"]
     image_type   = "COS_CONTAINERD"
     machine_type = "e2-micro"
     service_account = google_service_account.gke_sa.email
