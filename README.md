@@ -1,4 +1,4 @@
-# GCP_Iac_DevOps_Demo
+# GCP_IaC_DevOps_Demo
 
  ![gcp](https://user-images.githubusercontent.com/103090890/217839906-7df20dbc-73b1-46f1-88cf-b656036c9e80.png)
 
