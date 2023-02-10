@@ -1,7 +1,7 @@
 # GCP_IaC_DevOps_Demo
 
  ![gcp](https://user-images.githubusercontent.com/103090890/217839906-7df20dbc-73b1-46f1-88cf-b656036c9e80.png)
-![k8s](https://user-images.githubusercontent.com/103090890/218167065-6d789b30-9263-4e62-bcb3-e1cde87d5595.png)
+![3](https://user-images.githubusercontent.com/103090890/218168065-77f65452-a56d-49b4-bf2a-f4cc81cc4391.png)
 
 ## Project Specifications 
 ![Screenshot from 2023-02-09 16-36-49](https://user-images.githubusercontent.com/103090890/217843113-dfda4ec4-7907-4f64-9716-27296ea589fa.png)
