@@ -87,6 +87,8 @@ kubectl get ingress
 
 - Create a new pipeline and make it run from Jenkinsfile provided in this Repo
 
+- Note : You can add Ansible playbook to automate configuration and installation of packages and k8s deployment (out of project scope)
+
 - Note : This pipeline destroys the infrastructure after success of build ( for cost reasons ) to prevent this behaviour delete the ***post*** block from the Jenkinsfile
 
 ---------------------------------
