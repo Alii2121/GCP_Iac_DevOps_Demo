@@ -22,7 +22,7 @@
 
 ## Getting Started
 
-- Setup you GCP account
+- Setup your GCP account
 - Make sure to install required tools such as (Terraform, Docker)
 
 ---------------
